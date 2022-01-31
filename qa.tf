@@ -61,7 +61,7 @@ resource "aws_security_group" "worker_group_mgmt_two" {
 
 resource "aws_security_group" "all_worker_mgmt" {
   name_prefix = "all_worker_management"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = module.vpc1.vpc_id
 
   ingress {
     from_port = 22
@@ -128,9 +128,9 @@ module "eks1" {
 
 
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.cluster.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-  token                  = data.aws_eks_cluster_auth.cluster.token
+  host                   = data.aws_eks_cluster.cluster1.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster1.certificate_authority.0.data)
+  token                  = data.aws_eks_cluster_auth.cluster1.token
   #load_config_file       = false
   #version                = "~> 1.12"
 }
