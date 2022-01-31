@@ -17,10 +17,10 @@ terraform {
 
 }
 
- variable "region" {
+variable "region" {
   default     = "us-east-2"
   description = "AWS region"
-} 
+}
 
 variable "cluster_name1" {
   description = "name"
@@ -80,10 +80,10 @@ module "vpc1" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.2.0"
 
-  name                 = "${var.cluster_name1}-vpc"
-  cidr                 = "10.0.0.0/16"
+  name = "${var.cluster_name1}-vpc"
+  cidr = "10.0.0.0/16"
   //azs                  = data.aws_availability_zones.available.names
-  azs                  = ["us-east-2a","us-east-2b"]
+  azs = ["us-east-2a", "us-east-2b"]
   //private_subnets      = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   //public_subnets       = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
   private_subnets      = ["10.0.1.0/24", "10.0.2.0/24"]
@@ -94,12 +94,12 @@ module "vpc1" {
 
   public_subnet_tags = {
     "kubernetes.io/cluster/${var.cluster_name1}" = "shared"
-    "kubernetes.io/role/elb"                    = "1"
+    "kubernetes.io/role/elb"                     = "1"
   }
 
   private_subnet_tags = {
     "kubernetes.io/cluster/${var.cluster_name1}" = "shared"
-    "kubernetes.io/role/internal-elb"           = "1"
+    "kubernetes.io/role/internal-elb"            = "1"
   }
 }
 
